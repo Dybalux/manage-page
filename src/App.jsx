@@ -1,20 +1,20 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
 
 const styles = {
   error: {
-    color: "red",
-    fontSize: "12px",
-    marginTop: "5px"
-  }
-}
+    color: 'red',
+    fontSize: '12px',
+    marginTop: '5px',
+  },
+};
 
 function LoginForm() {
   //Guardo los valores de los inputs
   const [formData, setFormData] = useState({
-    user: "",
-    password: ""
-  })
+    user: '',
+    password: '',
+  });
 
   //Guardo los errores de los inputs
   const [errors, setErrors] = useState({});
@@ -22,42 +22,46 @@ function LoginForm() {
   //Funcion que maneja los cambios en los inputs
   const handleChange = (event) => {
     const { name, value } = event.target;
+
     setFormData({
       ...formData,
-      [name]: value
-    })
-  }
+      [name]: value,
+    });
+  };
 
   //Funcion para validar el formulario
   const validate = () => {
     let tempErrors = {};
-    if(!formData.user){
-      tempErrors.user = "El usuario es obligatorio";
-    } else if(formData.password.length < 6){
-      tempErrors.password = "La contraseña debe tener al menos 6 caracteres";
+
+    if (!formData.user) {
+      tempErrors.user = 'El usuario es obligatorio';
+    } else if (formData.password.length < 6) {
+      tempErrors.password = 'La contraseña debe tener al menos 6 caracteres';
     }
     // Devuelve true si no hay errores (el objeto está vacío)
+
     return Object.keys(tempErrors).length === 0;
-  }
+  };
 
   //Funcion que maneja el envio del formulario
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(validate()){
-      alert("Formulario enviado");
-      console.log("Datos enviados: " , formData);
-    } else{
+
+    if (validate()) {
+      alert('Formulario enviado');
+      console.log('Datos enviados: ', formData);
+    } else {
       console.log('El formulario tiene errores y no se enviará.');
-      alert("El formulario tiene errores y no se enviará.");
+      alert('El formulario tiene errores y no se enviará.');
       setErrors({
-        user: !formData.user ? "El usuario es obligatorio" : "",
-        password: formData.password.length < 6 ? "La contraseña debe tener al menos 6 caracteres" : ""
+        user: !formData.user ? 'El usuario es obligatorio' : '',
+        password: formData.password.length < 6 ? 'La contraseña debe tener al menos 6 caracteres' : '',
       });
     }
-  }
+  };
 
-  return(
+  return (
     <form onSubmit={handleSubmit}>
       <h2>Iniciar Sesión</h2>
       <div>
@@ -86,22 +90,22 @@ function LoginForm() {
       </div>
       <button type='submit'>Ingresar</button>
     </form>
-  )
+  );
 }
 function App() {
 
   return (
     <>
       <div className="App">
-      <header className="App-header">
-        <h1>Formulario de Inicio de Sesión</h1>
-      </header>
-      <main>
-        <LoginForm />
-      </main>
-    </div>
+        <header className="App-header">
+          <h1>Formulario de Inicio de Sesión</h1>
+        </header>
+        <main>
+          <LoginForm />
+        </main>
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
